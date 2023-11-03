@@ -1,0 +1,32 @@
+import os
+import shutil
+
+# Define source directory and target folders
+source_dir = '/path/to/source/directory'
+image_dir = '/path/to/target/image/folder'
+document_dir = '/path/to/target/document/folder'
+
+# List of file extensions to move
+image_extensions = ['.jpg', '.png', '.jpeg', '.gif']
+document_extensions = ['.pdf', '.docx', '.txt']
+
+# Iterate through files in the source directory
+for filename in os.listdir(source_dir):
+    src_file = os.path.join(source_dir, filename)
+
+    # Check file extension
+    if filename.endswith(tuple(image_extensions)):
+        dest_folder = image_dir
+    elif filename.endswith(tuple(document_extensions)):
+        dest_folder = document_dir
+    else:
+        # You can add more categories or a default folder for other file types
+        dest_folder = '/path/to/target/other/folder'
+
+    dest_file = os.path.join(dest_folder, filename)
+
+    # Move the file to the appropriate folder
+    shutil.move(src_file, dest_file)
+    print(f"Moved {filename} to {dest_folder}")
+
+print("File organization complete.")
